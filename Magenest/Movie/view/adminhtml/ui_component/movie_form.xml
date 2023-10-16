@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">movie_form.movie_form_data_source</item>
+            <item name="deps" xsi:type="string">movie_form.movie_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Movie</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="Magenest\Movie\Block\Adminhtml\Edit\Button\Save"/>
+            <button name="reset" class="Magenest\Movie\Block\Adminhtml\Edit\Button\Reset"/>
+            <button name="back" class="Magenest\Movie\Block\Adminhtml\Edit\Button\BackMovie"/>
+        </buttons>
+        <namespace>movie_form</namespace>
+        <dataScope>data</dataScope>
+    </settings>
+    <dataSource name="movie_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">
+                Magenest\Movie\Model\Movie\DataProvider
+            </argument>
+            <argument name="name" xsi:type="string">movie_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">movie_id</argument>
+            <argument name="requestFieldName" xsi:type="string">movie_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="*/movie/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="movie_information">
+        <settings>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+            <label translate="true">Movie Information</label>
+        </settings>
+        <field name="movie_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">movie_information</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>movie_id</dataScope>
+            </settings>
+        </field>
+        <field name="name" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">movie_information</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Movie Name</label>
+                <visible>true</visible>
+                <dataScope>name</dataScope>
+            </settings>
+        </field>
+        <field name="description" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">movie_information</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Description</label>
+                <visible>true</visible>
+                <dataScope>description</dataScope>
+            </settings>
+        </field>
+        <field name="rating" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">movie_information</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-number" xsi:type="boolean">true</rule>
+                    <rule name="not-negative-amount" xsi:type="boolean">true</rule>
+                    <rule name="validate-number-range" xsi:type="string">0.00-100.00</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Movie Rating</label>
+                <dataScope>rating</dataScope>
+                <notice>Enter number from 0 to 100</notice>
+            </settings>
+        </field>
+        <field name="director_id" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">movie_information</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>number</dataType>
+                <label translate="true">Director Name</label>
+                <dataScope>director_id</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magenest\Movie\Model\Source\DirectorName"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+    </fieldset>
+</form>
