@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="magenest_movie_after_save">
+        <observer name="magenest_movie_after_save_movie_change_rating"
+                  instance="Magenest\Movie\Observer\Movie\ChangeRating"/>
+    </event>
+    <event name="admin_system_config_changed_section_movie">
+        <observer name="admin_system_config_changed_section_movie_change_value_demo_text"
+                  instance="Magenest\Movie\Observer\Config\ChangeValue"/>
+    </event>
+</config>

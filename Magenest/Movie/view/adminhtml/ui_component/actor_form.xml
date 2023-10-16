@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">actor_form.actor_form_data_source</item>
+            <item name="deps" xsi:type="string">actor_form.actor_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Actor</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="Magenest\Movie\Block\Adminhtml\Edit\Button\Save"/>
+            <button name="reset" class="Magenest\Movie\Block\Adminhtml\Edit\Button\Reset"/>
+            <button name="back" class="Magenest\Movie\Block\Adminhtml\Edit\Button\BackActor"/>
+        </buttons>
+        <namespace>actor_form</namespace>
+        <dataScope>data</dataScope>
+    </settings>
+    <dataSource name="actor_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">
+                Magenest\Movie\Model\Actor\DataProvider
+            </argument>
+            <argument name="name" xsi:type="string">actor_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">actor_id</argument>
+            <argument name="requestFieldName" xsi:type="string">actor_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="*/actor/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="actor_information">
+        <settings>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+            <label translate="true">Actor Information</label>
+        </settings>
+        <field name="actor_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">actor_information</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>actor_id</dataScope>
+            </settings>
+        </field>
+        <field name="name" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">actor_information</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Actor Name</label>
+                <visible>true</visible>
+                <dataScope>name</dataScope>
+            </settings>
+        </field>
+    </fieldset>
+</form>

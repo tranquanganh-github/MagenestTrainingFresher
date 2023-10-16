@@ -1,0 +1,35 @@
+<?php /** @var Magenest\Movie\Block\Index $block ; */
+$movies = $block->getMovies();
+?>
+<div class="row">
+    <table class="table">
+        <tr class="table-title">
+            <th><?= $block->escapeHtml(__('STT')) ?></th>
+            <th><?= $block->escapeHtml(__('Movie')) ?></th>
+            <th><?= $block->escapeHtml(__('Description')) ?></th>
+            <th><?= $block->escapeHtml(__('Rating')) ?></th>
+            <th><?= $block->escapeHtml(__('Director')) ?></th>
+            <th><?= $block->escapeHtml(__('Actor')) ?></th>
+        </tr>
+        <?= $i = 0; ?>
+        <?php foreach ($movies as $item): ?>
+            <?php $directorName = $block->getDirectorById($item['director_id']); ?>
+            <tr class="table-content">
+                <td><?= $block->escapeHtml(__($i++)); ?></td>
+                <td><?= $block->escapeHtml(__($item['name'])); ?></td>
+                <td><?= $block->escapeHtml(__($item['description'])); ?></td>
+                <td><?= $block->escapeHtml(__($item['rating'])); ?></td>
+                <td><?= $block->escapeHtml(__($directorName)); ?></td>
+                <td>
+                    <ol>
+                        <?php $actorName = $block->getActorByMovieId($item['movie_id']); ?>
+                        <?php foreach ($actorName as $name): ?>
+                            <li><?= $block->escapeHtml(__($name)); ?></li>
+                        <?php endforeach; ?>
+                    </ol>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</div>
+
